@@ -1,0 +1,23 @@
+.tip { position: relative;}
+
+.tip:after {
+	position: absolute;
+  pointer-events: none;
+	content: attr(tip);
+	background: yellow;
+	color: red;
+	font-size: 12px;
+	white-space: nowrap;
+	top: 0%;
+	left: 70%;
+}
+
+.tip:before {
+	position: absolute;
+  pointer-events: none;
+	content: attr(display);
+	font-size: 12px;
+	white-space: nowrap;
+	top: 70%;
+	left: 20%;
+}

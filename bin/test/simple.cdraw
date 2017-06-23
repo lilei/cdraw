@@ -1,0 +1,17 @@
+digraph simple{
+    node [shape = "box" fontname = "FangSong"];
+    edge [style = "dashed"];
+    size = "7.5,7.5";
+    a[style = "filled" color = "steelblue" fillcolor = "steelblue" label = "a节点"];
+    b[color = "red",shape = "record"];
+    subgraph cluster_cd{
+        label = "c and d";
+        c;
+        d;
+    }
+    a -> b;
+    b -> d[style = "dotted"];
+    c -> d[color = "red",style = "solid"];
+    title[shape ="plaintext" label = "graphviz画图示例"]
+}
+

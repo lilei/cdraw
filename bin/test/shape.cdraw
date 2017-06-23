@@ -1,0 +1,17 @@
+digraph{
+    rankdir = TB;
+    triangle[shape = "triangle"];
+    egg[shape = "egg"];
+    circle[shape = "circle"];
+    box[shape = "box"];
+    diamond[shape = "diamond"];
+    trapezium[shape = "trapezium"];
+    parallelogram[shape = "parallelogram"];
+    house[shape = "house"];
+    hexagon[shape = "hexagon"];
+    octagon[shape = "octagon"];
+    note[shape = "note"];
+    tab[shape = "tab"];
+    box3d[shape = "box3d"];
+    component[shape = "component"];
+}

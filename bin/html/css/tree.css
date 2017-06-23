@@ -1,0 +1,72 @@
+.tree{
+  padding: 0 0 0 16px;
+  font-family: tahoma, arial, helvetica;
+  font-size: 10pt;
+}
+
+.tree-expander{
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: top;
+  background-repeat: no-repeat;
+  background-position: left;
+}
+
+.tree-node-has-children  .tree-expander{
+  background-image: url(icons.gif);
+  background-position: 0px -80px;
+}
+
+.tree-node-has-children.tree-node-expand .tree-expander{
+  background-image: url(icons.gif);
+  background-position: -32px -80px;
+}
+
+.tree-node-file .tree-expander{
+  background-image: node;
+}
+
+.tree-icon{
+  margin-top: 2px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  vertical-align: top;
+  background-repeat: no-repeat;
+  background-position: left;
+  background-image: url(icons.gif);
+}
+
+.tree-node-dir > .tree-icon{
+  background-position: 0px -16px;
+}
+
+.tree-node-file > .tree-icon{
+  background-position: 0px 0px;
+}
+
+.tree-title{
+  cursor:pointer;
+}
+
+.tree-node-active .tree-title{
+  background:linear-gradient(to bottom, #f2f9fd 0%, #c4e8fa 100%);
+  border-color: #d9d9d9;
+}
+
+li{
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  background-attachment: scroll;
+  background-color: transparent;
+  background-position: 0px 0px;
+  background-repeat: repeat-y;
+  background-image: none;
+  margin: 0;
+  font-family: tahoma, arial, helvetica;
+  font-size: 10pt;
+  white-space: nowrap;
+}

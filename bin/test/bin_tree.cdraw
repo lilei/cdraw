@@ -1,0 +1,20 @@
+digraph{
+    a;
+    b;
+    c[color = "red"];
+    d;
+    e;
+    f;
+    g;
+    h;
+    i;
+    a->{b,c};
+    
+    b->{d,e};
+    c->{f,g};
+    d->{h,i};
+    e->{j,k};
+    f->{l,m};
+    g->{n,o};
+    a -> b;
+}

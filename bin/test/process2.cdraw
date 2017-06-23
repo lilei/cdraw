@@ -1,0 +1,57 @@
+digraph G {    
+edge [fontname="Microsoft YaHei" color=brown, fontcolor=brown1, fontsize=10, weight=1 ];    
+node [shape="box", fontname="Microsoft YaHei", width="3.2" ,color = lightblue ];    
+{    
+    step1 [label="预处理:20m"  center=true ];    
+    step2 [ shape="record" label="<f0>验证数据:20m|<f1>自由采集:20'"];    
+step3 [label="采集数据:20m"  ];    
+step4 [label="统计事实数据:20m"  ];    
+step5 [label="统计渐变维度:20m"  ];    
+step6 [label="采集回单数据:20m"  ];    
+step7 [label="聚合统计报表:20m"  ];      
+}    
+node [shape="box", fontname="Microsoft YaHei" width="3.2"  bgcolor="white"];    
+{    
+    sub_step1 [label="预处理:20m"  center=true ];    
+    sub_step2 [ shape="record" label="<f0>验证数据:20m|<f1>自由采集:20m"];    
+sub_step3 [label="采集数据:20m"  ];    
+sub_step4 [label="统计事实数据:20m"  ];    
+sub_step5 [label="统计渐变维度:20m"  ];    
+sub_step6 [label="采集回单数据:20m"  ];    
+  
+}    
+node [style="rounded", fontname="Microsoft YaHei" ]{    
+    begin [label="开始时间: 00:00:00"];    
+    end [label="结束时间: 06:00:00" ];    
+}    
+subgraph cluster_main{    
+    label="主采集服务器:107个DB,耗时1600m";    
+    bgcolor="mintcream";    
+    fontname="Microsoft YaHei";    
+    style="dashed";  
+    step1;    
+    step2;   
+    step3;    
+    step4;   
+    step5;    
+    step6;   
+    step7;    
+}    
+subgraph cluster_sub{    
+    label="珠海采集服务器:107个DB,耗时1600m";   
+    bgcolor="mintcream";    
+    fontname="Microsoft YaHei";    
+    style="dashed";    
+    sub_step1;    
+    sub_step2;    
+    sub_step3;    
+    sub_step4;   
+    sub_step5;    
+    sub_step6;   
+}    
+begin ->     step1 ->     step2:f0 ->     step3 ->     step4 ->     step5 ->     step6 ->     step7 -> end;   
+step1 ->step2:f1;  
+begin -> sub_step1 -> sub_step2:f0 -> sub_step3 -> sub_step4 -> sub_step5 -> sub_step6  -> end;   
+sub_step1 -> sub_step2:f1;  
+}    
+

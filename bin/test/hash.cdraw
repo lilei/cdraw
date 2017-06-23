@@ -1,0 +1,13 @@
+digraph{
+    fontname = "Verdana";
+    rankdir = LR;
+    node[shape = "record"];
+    edge[style = "dashed" color = "red" style = "solid"];
+    st_hash_type[label = "<head>st_hash_type|(*compare)|(*hash)"];
+    st_table[label = "st_table|<type>type|num_bins|num_entnes|<bins>bins"];
+    st_table_entry[label = "<head>st_table_entry|hash|key|record|<next>next"]
+    st_table:type->st_hash_type:head; 
+    st_table:bins->st_table_entry:head;
+    st_table_entry:next->st_table_entry:head[color = "green" style = "dashed"];
+}
+
