@@ -6,7 +6,7 @@ editor.getSession().setMode("ace/mode/dot");
 editor.setShowPrintMargin(false);
 document.getElementById('editor').style.fontSize='14px';
 document.lock = false;
-editor.setKeyboardHandler("ace/keyboard/vim");
+
 editor.setOptions({
     enableBasicAutocompletion: true,
     enableSnippets: true,

@@ -1,168 +1,161 @@
-<html lang="en">
+﻿<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>codeDraw</title>
-	<!-- Bootstrap -->
-  <link href="css/tooltip.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/fa-color.css">
-  <link rel="stylesheet" href="css/tree.css">
-	<style type="text/css">
+    <!-- Bootstrap -->
+    <link href="css/tooltip.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/fa-color.css">
+    <link rel="stylesheet" href="css/tree.css">
+    <style type="text/css">
+        html {
+            _padding: 100px 0 100px 0;
+            _overflow: hidden;
+        }
 
-    html{
-        _padding:100px 0 100px 0;
-        _overflow:hidden;
-    }
-    body {
-        height:100%;
-        width:100%;
-    }
-    #head{
-    height:50px;
-    width:100%;
-    left:0;
-    top:0px;
-    position: absolute;
-    z-index:100
-    }
-    #doc-head{
-        width:100%;
-        z-index:20;
-        position:absolute;
-        top:50px;
-    }
-    #container{
-        width:100%;
-        overflow:auto;
-        position:absolute;
-        z-index:20;
-        left:0;
-        top:50px;
-        bottom:0px;
-        margin-bottom: 15px;
-        _height:100%;
-    }
-	#left{
-		width:45%;
-	}
-	#render{
-		width:48%;
-    height:100%;
-		margin-left:52%;
-    padding-left: 20px;
-		position:absolute;
-		overflow-y: scroll;
-		overflow-x: hidden;
-	}
-	.mahua-spliter{
-	 width:6px;
-     position:absolute;
-     left:50%;
-     height:100%;
-     z-index:10000;
-     border:2px dashed #CCC;
-     cursor:ew-resize;
-	 }
+        body {
+            height: 100%;
+            width: 100%;
+        }
 
-  .sliderbar{
-    position:absolute;
-    width:250px;
-    z-index:200;
-  }
+        #head {
+            height: 50px;
+            width: 100%;
+            left: 0;
+            top: 0px;
+            position: absolute;
+            z-index: 100
+        }
 
-	 </style>
+        #doc-head {
+            width: 100%;
+            z-index: 20;
+            position: absolute;
+            top: 50px;
+        }
+
+        #container {
+            width: 100%;
+            overflow: auto;
+            position: absolute;
+            z-index: 20;
+            left: 0;
+            top: 50px;
+            bottom: 0px;
+            margin-bottom: 15px;
+            _height: 100%;
+        }
+
+        #left {
+            width: 45%;
+        }
+
+        #render {
+            width: 48%;
+            height: 100%;
+            margin-left: 52%;
+            padding-left: 20px;
+            position: absolute;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+
+        .mahua-spliter {
+            width: 6px;
+            position: absolute;
+            left: 50%;
+            height: 100%;
+            z-index: 10000;
+            border: 2px dashed #CCC;
+            cursor: ew-resize;
+        }
+
+        .sliderbar {
+            position: absolute;
+            width: 250px;
+            z-index: 200;
+        }
+    </style>
 
 </head>
 <body>
 
     <div id="head">
         <nav class="navbar navbar-default navbar-fixed-top">
-          <div class="container-fluid">
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav" id="menu-bar">
-              </ul>
-              <ul class="nav navbar-nav navbar-right">
-                <li><a href="#" title = "报告缺陷"><i class="fa fa-bug"></i> </a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class = "fa fa-gear"></i> <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li id = "btn-normal-mod"><a href="#">普通模式</a></li>
-                    <li id = "btn-vim-mod"><a href="#">VIM模式</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">导出PDF</a></li>
-                  </ul>
-                </li>
-              </ul>
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav" id="menu-bar"></ul>
+                    <ul class="nav navbar-nav navbar-right" id="right-menu-bar"></ul>
+                </div>
             </div>
-          </div>
 
-          <div id = "slider" class = "sliderbar" style = "display:none">
-          </div>
+            <div id="slider" class="sliderbar" style="display:none">
+            </div>
 
         </nav>
     </div>
-<div id= "container">
-	<div class="mahua-spliter" id="mahua-spliter"></div>
-	<div id = "left">
-		<div id = "editor" style="height:100%;width:50%;position: absolute;"></div>
-    </div>
-	<div id = "render"></div>
-    </div>
-</div>
-
-
-<!-- link Modal -->
-<div class="modal" id="new-file" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">新建</h4>
-      </div>
-      <div class="modal-body">
-        <div class="radio">
-            <label>
-              <input type="radio" name="file-type" value="graphviz" checked>
-              graphviz
-            </label>
+    <div id="container">
+        <div class="mahua-spliter" id="mahua-spliter"></div>
+        <div id="left">
+            <div id="editor" style="height:100%;width:50%;position: absolute;"></div>
         </div>
-          <div class="radio">
-            <label>
-              <input type="radio" name="file-type"  value="easy-graph" disabled>
-              easy-graph
-            </label>
-          </div>
-          <div class="radio disabled">
-            <label>
-              <input type="radio" name="file-type"  value="flow-chart" disabled>
-              流程图
-            </label>
-          </div>
-          <div class="radio disabled">
-            <label>
-              <input type="radio" name="file-type"  value="gantt-chart" disabled>
-              甘特图
-            </label>
-          </div>
-          <div class="radio disabled">
-            <label>
-              <input type="radio" name="file-type"  value="sequence" disabled>
-              时序图
-            </label>
-          </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" id="btn-create-file">创建</button>
-      </div>
+        <div id="render"></div>
     </div>
-  </div>
-</div>
-  	<script src="js/jquery.js"></script>
+    </div>
+
+
+    <!-- link Modal -->
+    <div class="modal" id="new-file" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">新建</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="file-type" value="graphviz" checked>
+                            graphviz
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="file-type" value="easy-graph" disabled>
+                            easy-graph
+                        </label>
+                    </div>
+                    <div class="radio disabled">
+                        <label>
+                            <input type="radio" name="file-type" value="flow-chart" disabled>
+                            流程图
+                        </label>
+                    </div>
+                    <div class="radio disabled">
+                        <label>
+                            <input type="radio" name="file-type" value="gantt-chart" disabled>
+                            甘特图
+                        </label>
+                    </div>
+                    <div class="radio disabled">
+                        <label>
+                            <input type="radio" name="file-type" value="sequence" disabled>
+                            时序图
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="btn-create-file">创建</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.js"></script>
     <script src="js/client.js" charset="utf-8"></script>
     <script src="js/draw.js" charset="utf-8"></script>
-  	<script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="src-min-noconflict/ext-language_tools.js"></script>
     <script src="src-noconflict/keybinding-vim.js" type="text/javascript" charset="utf-8"></script>
@@ -173,9 +166,10 @@
     <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/menu.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/menu-common.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/menu-right.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/menu-graphviz.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/key-bind.js" type="text/javascript" charset="utf-8"></script>
-  	<script src="js/cef.js"></script>
-  	<script src="js/dialog.js"></script>
+    <script src="js/cef.js"></script>
+    <script src="js/dialog.js"></script>
 </body>
 </html>

@@ -1,9 +1,27 @@
-var menuBar = {
-  slider  :{icon:"fa fa-exchange"      ,bindKey:"Ctrl-L"  ,title:"菜单"},
-  open    :{icon:"fa fa-folder-open-o" ,bindKey:"Ctrl-O"  ,title:"打开"},
-  new     :{icon:"fa fa-file-o"        ,bindKey:"Ctrl-N"  ,title:"新建"},
-  save    :{icon:"fa fa-save"          ,bindKey:"Ctrl-S"  ,title:"保存"},
-  undo    :{icon:"fa fa-undo"          ,bindKey:"Ctrl-Z"  ,title:"撤销"},
-  redo    :{icon:"fa fa-repeat"        ,bindKey:"Ctrl-Y"  ,title:"重做"},
-  font    :{icon:"fa fa-gear"          ,bindKey:"Ctrl-Y"  ,title:"配置"}
+//右部菜单
+var rightMenu = {
+  config  :{icon:"fa fa-gear"        ,title:"设置"},
+};
+
+
+rightMenu.config.sub = {
+  common     :{icon:"fa fa-pencil"        ,title:"普通模式",  showTitle:true},
+  vim        :{icon:"fa fa-pencil-square" ,title:"vim模式",  showTitle:true},
+  issue      :{icon:"fa fa-github"        ,title:"报告缺陷",  showTitle:true},
 }
+
+rightMenu.config.sub.common.func = function(){
+  editor.setKeyboardHandler("");
+  editor.focus();
+}
+
+rightMenu.config.sub.vim.func = function(){
+  editor.setKeyboardHandler("ace/keyboard/vim");
+  editor.focus();
+}
+
+rightMenu.config.sub.issue.func = function(){
+  window.open("https://github.com/lilei/cdraw/issues","_blank")
+}
+
+rightMenuBar(rightMenu);

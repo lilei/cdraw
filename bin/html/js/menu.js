@@ -1,14 +1,24 @@
 
-function menuBar(menuList){
-  for (var btn in menuList) {
-    if (menuList.hasOwnProperty(btn)) {
-      appendMenu(menuList[btn]);
+function menuBar(menuList) {
+    var bar = document.getElementById("menu-bar");
+    for (var btn in menuList) {
+        if (menuList.hasOwnProperty(btn)) {
+            appendMenu(bar,menuList[btn]);
+        }
     }
-  }
+}
+
+function rightMenuBar(menuList){
+    var bar = document.getElementById("right-menu-bar");
+    for (var btn in menuList) {
+        if (menuList.hasOwnProperty(btn)) {
+            appendMenu(bar,menuList[btn]);
+        }
+    }
 }
 
 
-function createMenu(menuInfo){
+function createMenu(menuInfo) {
     var li = document.createElement("li");
     var a = document.createElement("a");
     var i = document.createElement("i");
@@ -18,12 +28,12 @@ function createMenu(menuInfo){
     i.className = menuInfo.icon;
 
     if (menuInfo.showTitle) {
-      var span = document.createElement("span");
-      span.innerText = menuInfo.title;
-      a.appendChild(span);
-    }else{
-      a.classList.add("tip");
-      a.title = menuInfo.title;
+        var span = document.createElement("span");
+        span.innerText = menuInfo.title;
+        a.appendChild(span);
+    } else {
+        a.classList.add("tip");
+        a.title = menuInfo.title;
     }
 
     a.href = "#";
@@ -32,47 +42,46 @@ function createMenu(menuInfo){
     li.onclick = menuInfo.func;
 
     if (menuInfo.sub) {
-      dropDownMenu(li);
+        dropDownMenu(li);
 
-      for (var btn in menuInfo.sub) {
-        if (menuInfo.sub.hasOwnProperty(btn)){
-          li.appendMenu(menuInfo.sub[btn]);
-          }
+        for (var btn in menuInfo.sub) {
+            if (menuInfo.sub.hasOwnProperty(btn)) {
+                li.appendMenu(menuInfo.sub[btn]);
+            }
         }
-      }
+    }
     return li;
 }
 
-function dropDownMenu(li){
-  var a = li.getElementsByTagName("a")[0];
-  var i = li.getElementsByTagName("i")[0];
-  var span = document.createElement("span");
-  var ul = document.createElement("ul");
-  a.appendChild(span);
-  li.appendChild(ul);
+function dropDownMenu(li) {
+    var a = li.getElementsByTagName("a")[0];
+    var i = li.getElementsByTagName("i")[0];
+    var span = document.createElement("span");
+    var ul = document.createElement("ul");
+    a.appendChild(span);
+    li.appendChild(ul);
 
-  li.className = "dropdown";
+    li.className = "dropdown";
 
-  a.classList.add("dropdown-toggle");
-  //a.className = "dropdown-toggle";
-  a.setAttribute("data-toggle","dropdown");
-  a.setAttribute("role","button");
-  a.setAttribute("aria-expanded","false");
+    a.classList.add("dropdown-toggle");
+    //a.className = "dropdown-toggle";
+    a.setAttribute("data-toggle", "dropdown");
+    a.setAttribute("role", "button");
+    a.setAttribute("aria-expanded", "false");
 
-  span.className = "caret";
+    span.className = "caret";
 
-  ul.className = "dropdown-menu";
-  ul.setAttribute("role","menu");
+    ul.className = "dropdown-menu";
+    ul.setAttribute("role", "menu");
 
-  li.appendMenu = function(menuInfo){
-    ul.appendChild(createMenu(menuInfo));
-  }
+    li.appendMenu = function (menuInfo) {
+        ul.appendChild(createMenu(menuInfo));
+    }
 }
 
-function appendMenu(menuInfo){
-  var menu = createMenu(menuInfo);
-  var menuBar = document.getElementById("menu-bar");
-  menuBar.appendChild(menu);
+function appendMenu(bar,menuInfo) {
+    var menu = createMenu(menuInfo);
+    bar.appendChild(menu);
 }
 
 /*
@@ -165,7 +174,7 @@ g          //$("#files").click();
 
 
 //同步滚动
-editor.getSession().on("changeScrollTop", function(num){
+editor.getSession().on("changeScrollTop", function (num) {
     var left = $(".ace_scrollbar-v").get(0);
     var right = $("#render").get(0);
     percentage = num / (left.scrollHeight - left.offsetHeight);
@@ -177,13 +186,13 @@ editor.getSession().setUseWrapMode(true);
 
 var dragging = false;
 var iX, iY;
-$("#mahua-spliter").mousedown(function(e) {
+$("#mahua-spliter").mousedown(function (e) {
     dragging = true;
     iX = e.clientX - this.offsetLeft;
     this.setCapture && this.setCapture();
     return false;
 });
-document.onmousemove = function(e) {
+document.onmousemove = function (e) {
     if (dragging) {
         var e = e || window.event;
         var a = $("#mahua-spliter").css("left");
@@ -191,12 +200,12 @@ document.onmousemove = function(e) {
         $("#render").css("width", $(window).innerWidth() - parseInt(a));
         $("#render").css("marginLeft", a);
         var oX = e.clientX - iX;
-        $("#mahua-spliter").css({"left":oX + "px"});
+        $("#mahua-spliter").css({ "left": oX + "px" });
         return false;
     }
 };
-$(document).mouseup(function(e) {
-    if(dragging){
+$(document).mouseup(function (e) {
+    if (dragging) {
         dragging = false;
         editor.resize();
         $("#mahua-spliter")[0].releaseCapture();
