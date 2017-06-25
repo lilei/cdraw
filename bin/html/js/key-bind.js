@@ -1,5 +1,19 @@
 var toolTip = false;
 var unBinder = [];
+
+(function bindKey(){
+    var menus = $(".tip");
+    for (var i = 0; i < menus.length; i++) {
+      var key = String.fromCharCode('a'.charCodeAt() + i);
+      (function(k,m){
+        keymage("alt-" + k,function(){
+          m.click();
+          return false;
+        });
+      })(key,menus[i])
+    }
+})();
+
 function unBind(){
   for (var i = 0; i < unBinder.length; i++) {
     unBinder[i]();
@@ -20,7 +34,7 @@ function showToolTip(){
         m.display = m.title;
         m.setAttribute("display",m.title);
       })(key,menus[i])
-  }
+    }
 
     toolTip = true;
 }
@@ -45,16 +59,3 @@ document.onkeydown = function(event){
     return false;
   }
 }
-
-function test() {
-     var pAry = document.getElementsByTagName("p");
-     for( var i=0; i< pAry.length; i++ ) {
-      (
-      function(arg){
-       pAry[i].onclick = function() {
-          alert(arg);
-       };
-      }
-    )(i);//调用时参数
-    }
- }
