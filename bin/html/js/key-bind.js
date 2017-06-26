@@ -8,6 +8,7 @@ var unBinder = [];
       (function(k,m){
         keymage("alt-" + k,function(){
           m.click();
+          hideToolTip();
           return false;
         });
       })(key,menus[i])
@@ -51,11 +52,19 @@ function hideToolTip(){
 
 document.onkeydown = function(event){
   if (event.keyCode == 18) {
-    if (toolTip) {
-      hideToolTip();
-    }else{
+    if (!toolTip) {
       showToolTip();
     }
+    return false;
+  }
+}
+
+document.onkeyup = function(event){
+  if (event.keyCode == 18) {
+    console.log("alt key up");
+    if (toolTip) {
+      hideToolTip();
+    } 
     return false;
   }
 }
