@@ -15,23 +15,12 @@ var unBinder = [];
     }
 })();
 
-function unBind(){
-  for (var i = 0; i < unBinder.length; i++) {
-    unBinder[i]();
-  };
-}
-
 function showToolTip(){
     var menus = $(".tip");
     for (var i = 0; i < menus.length; i++) {
       var key = String.fromCharCode('a'.charCodeAt() + i);
       menus[i].setAttribute("tip",key);
       (function(k,m){
-        unBinder.push(keymage(k,function(){
-          hideToolTip();
-          m.click();
-          return false;
-        }));
         m.display = m.title;
         m.setAttribute("display",m.title);
       })(key,menus[i])
@@ -46,7 +35,6 @@ function hideToolTip(){
       menus[i].setAttribute("tip","");
       menus[i].setAttribute("display","");
     }
-    unBind();
     toolTip = false;
 }
 
@@ -54,6 +42,7 @@ document.onkeydown = function(event){
   if (event.keyCode == 18) {
     if (!toolTip) {
       showToolTip();
+      editor.focus();
     }
     return false;
   }
@@ -61,10 +50,54 @@ document.onkeydown = function(event){
 
 document.onkeyup = function(event){
   if (event.keyCode == 18) {
-    console.log("alt key up");
     if (toolTip) {
       hideToolTip();
+      editor.focus();
     } 
     return false;
   }
 }
+
+keymage("j",function(){
+  var list = $("li.dropdown.open>ul>li>a");
+  if (list.length == 0) {
+   return; 
+  }
+
+  var focus = $("li.dropdown.open>ul>li>a:focus");
+  var next = null;
+  if (focus.length == 0) {
+    next = list.eq(0); 
+  }else{
+    var cur = jQuery.inArray(focus[0],list.toArray());
+    if (cur == list.length -1) {
+      next = list.eq(0); 
+    }else{
+      next = list.eq(cur + 1);
+    }
+  }
+  next.focus();
+  return false;
+});
+
+keymage("k",function(){
+  var list = $("li.dropdown.open>ul>li>a");
+  if (list.length == 0) {
+   return; 
+  }
+
+  var focus = $("li.dropdown.open>ul>li>a:focus");
+  var next = null;
+  if (focus.length == 0) {
+    next = list.eq(-1); 
+  }else{
+    var cur = jQuery.inArray(focus[0],list.toArray());
+    if (cur == 0) {
+      next = list.eq(-1); 
+    }else{
+      next = list.eq(cur - 1);
+    }
+  }
+  next.focus();
+  return false;
+});
